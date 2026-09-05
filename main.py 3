@@ -1,0 +1,79 @@
+############################################
+# Thi Thuy Tien Ho #  thithuytienho@usf.edu#
+#------------------------------------------#
+#main.py.: A script that allows for someone#
+#to enter a patient number, retrieve all   #
+#patient stats, or retrieve specific       #
+# patient stats.
+############################################
+heart_rate_samples = {
+    "J. Alvarez": [72, 75, 78],
+    "M. Chen": [80, 82],
+    "R. Okafor": [65, 68, 70, 66],
+    "S. Patel": [90, 95, 92, 88, 91],
+    "T. Nguyen": [77, 79],
+    "L. Kowalski": [68, 70, 69],
+    "D. Osei": [98, 101, 95, 99],
+    "A. Whitfield": [74, 76, 75, 73]
+}
+
+def calculate_stats(heart_rates):
+    """
+    Calculate the minimum, maximum and average heart rate
+    :param heart_rates:
+    :return: minimum, maximum and average heart rate
+    """
+
+    minimum= min(heart_rates)
+    maximum = max(heart_rates)
+    average = sum(heart_rates)/len(heart_rates)
+    return minimum,maximum,average
+
+# Now, let's ask the user to enter a patient number:
+
+patient_number = int(input("Enter patient number: (1-8): "))
+patient_names = list(heart_rate_samples.keys())
+
+#Get the patient name based on the patient number:
+patient_name = patient_names [patient_number - 1]
+
+#Get the heart rate samples for the selected patient:
+heart_rates = heart_rate_samples [patient_name]
+
+#Now let's ask the user whether they want all statistics
+#or one specific statistic:
+choice=input(
+    "Enter 1 for all patient stats or 2 for a specific stat: "
+)
+#Calculate the statistics
+minimum, maximum, average = calculate_stats(heart_rates)
+
+#If the user want all patient statistics:
+if choice == "1":
+    print(f"Patient: {patient_name}")
+    print(f"heart rate samples: {heart_rates}")
+    print(f"minimum heart rate: {minimum}")
+    print(f"maximum heart rate: {maximum}")
+    print(f"average heart rate: {average:.2f}")
+
+#if the user wants one specific statistic:
+elif choice == "2":
+    stat = input("Enter the statistic (minimum, maximum, average): "
+               )
+    if stat == "minimum":
+        print(f"Patient: {patient_name}")
+        print(f'maximum heart rate: {minimum}')
+
+    elif stat == "maximum":
+        print(f"Patient: {patient_name}")
+        print(f'minimum heart rate: {maximum}')
+
+    elif stat=="average":
+        print(f"Patient: {patient_name}")
+        print(f'average heart rate: {average:.2f}')
+
+    else:
+        print("invalid statistic")
+
+else:
+    print("invalid choice")
