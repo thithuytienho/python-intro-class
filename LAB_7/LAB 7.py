@@ -18,6 +18,10 @@ df = pd.read_csv(CSV_PATH)
 # Clean column names
 df.columns=df.columns.str.strip().str.lower().str.replace(" ", "_")
 
+for column in df.columns:
+    if df[column].name =="rownames":
+        df.drop(column, axis=1, inplace=True)
+        
 # List available column names
 print(f"/nAvailable column names:")
 for column in df.columns:
@@ -27,29 +31,48 @@ for column in df.columns:
 X_COL = input("/nEnter the X variable:").strip().lower()
 Y_COL = input("Enter the Y variable:").strip().lower()
 
+# Make sure the column exist
+if X_COL not in df.columns or Y_COL not in df.columns:
+    print("Error: One of both column names were not found.")
+    raise SystemExit
+
+# Select The X and Y columns
+data = df[[X_COL, Y_COL]].copy()
+
+# Remove commas from numeric values
+data[X_COL] = data[X_COL].astype(str).str.replace(",","", regex=False)
+data[Y_COL] = data[Y_COL].astype(str).str.replace(",","", regex=False)
+
+#Convert the selected columns to numeric values
+data[X_COL] = pd.to_numeric(data[X_COL], errors="coerce")
+data[Y_COL] = pd.to_numeric(data[Y_COL], errors="coerce")
+
 # Clean numeric values
 for column in [X_COL, Y_COL]:
     df[column] = pd.to_numeric(df[column].astype(str).str.replace(",","", regex=False), errors="coerce")
 
 # Remove rows missing for X and Y variables
-data = df[[X_COL, Y_COL]].dropna()
+data = data.dropna()
+
+# Display available rows
+print(f"/nRows available for regrission: {len(data)}")
 
 # Create scatterplot
 fig, ax = plt.subplots(figsize=(8,6))
+
 ax.scatter(data[X_COL], data[Y_COL], alpha=0.6, edgecolor="k", linewidth=0.3)
+
 ax.set_xlabel(X_COL)
 ax.set_ylabel(Y_COL)
 ax.set_title(f"{Y_COL} vs {X_COL} (n ={len(data)})")
 ax.grid(alpha=0.3)
+
 fig.tight_layout()
 
 # Ask user if they want to save the scatterplot
 save_scatter = input("/nWould you like to save the scatterplot? (yes/no):").strip().lower()
 if save_scatter == "yes":
-    scatter_file = input("Enter a filename for the scatterplot:").strip()
-
-    if not scatter_file.endswith(".png"):
-        scatter_file += ".png"
+    scatter_file = f"{df[X_COL]}vs_{Y_COL}.png"
 
     fig.savefig(scatter_file, dpi=300)
     print(f"saved scatterplot -> {scatter_file}")
