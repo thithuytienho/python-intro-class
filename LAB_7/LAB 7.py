@@ -47,10 +47,6 @@ data[Y_COL] = data[Y_COL].astype(str).str.replace(",","", regex=False)
 data[X_COL] = pd.to_numeric(data[X_COL], errors="coerce")
 data[Y_COL] = pd.to_numeric(data[Y_COL], errors="coerce")
 
-# Clean numeric values
-for column in [X_COL, Y_COL]:
-    df[column] = pd.to_numeric(df[column].astype(str).str.replace(",","", regex=False), errors="coerce")
-
 # Remove rows missing for X and Y variables
 data = data.dropna()
 
@@ -81,7 +77,7 @@ if save_scatter == "yes":
 X = sm.add_constant(data[X_COL])
 model = sm.OLS(data[Y_COL], X).fit()
 
-#print regression summary
+# print regression summary
 print("/nOLS Regression Summary: ")
 print(model.summary())
 
