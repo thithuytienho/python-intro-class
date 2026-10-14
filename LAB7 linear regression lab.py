@@ -47,8 +47,12 @@ if x_col not in df.columns or y_col not in df.columns:
 data = df[[x_col, y_col]].copy()
 
 # convert values to numeric
-data[x_col] = (data[x_col].astype(str).str.replace(" ", "_", regex=False))
-data[y_col] = (data[y_col].astype(str).str.replace(" ", "_", regex=False))
+data[x_col] = (
+    data[x_col].astype(str).str.replace(",", "", regex=False)
+)
+data[y_col] = (
+    data[y_col].astype(str).str.replace(",", "", regex=False)
+)
 
 #Convert the selected columns to numeric values
 data[x_col] = pd.to_numeric(data[x_col], errors="coerce")
@@ -63,8 +67,13 @@ print(f"/nRows available for regrission: {len(data)}")
 # create scatterplot
 fig, ax = plt.subplots(figsize=(8, 6))
 
-ax.scatter(data[x_col],data[y_col],alpha=0.6,edgecolor="k",linewidths=0.3,)
-
+ax.scatter(
+    data[x_col],
+    data[y_col],
+    alpha=0.6,
+    edgecolor="k",
+    linewidths=0.3,
+)
 ax.set_xlabel(x_col)
 ax.set_ylabel(y_col)
 ax.set_title(f"{y_col} vs {x_col} (n= {len(data)})")
@@ -73,7 +82,9 @@ ax.grid(alpha=0.3)
 fig.tight_layout()
 
 # save scatterplot
-save_scatter = input ("\nwould you like to save the sctaterplot? (yes/no): ").strip().lower()
+save_scatter = input (
+    "\nwould you like to save the sctaterplot? (yes/no): "
+).strip().lower()
 
 if save_scatter.lower() == "yes":
     scatter_file = f"{df[x_col]}vs_{y_col}.png"
@@ -83,7 +94,11 @@ if save_scatter.lower() == "yes":
 
 # perform OLS regression
 x = sm.add_constant(data[x_col])
-model = sm.OLS(data[y_col],x).fit()
+
+model = sm.OLS(
+    data[y_col],
+    x
+).fit()
 
 # print regression summary
 print("\nOLS regression summary:")
@@ -97,17 +112,34 @@ print("β1 (slope):", model.params[x_col])
 print("R²:", model.rsquared)
 
 # create regression line
-x_line =np.linspace(data[x_col].min(), data[x_col].max(), 100)
-y_line = model.params["const"] + model.params[x_col] * x_line
+x_line = np.linspace(
+    data[x_col].min(),
+    data[x_col].max(),
+    num=100
+)
+
+y_line = (
+    model.params["const"]
+    + model.params[x_col] * x_line
+)
 
 # plot regression line
-ax.plot(x_line, y_line, color="crimson", linewidth=2, label=f"OLS line (R² = {model.rsquared:.3f})")
+ax.plot(
+    x_line,
+    y_line,
+    linewidth=2,
+    label=f"OLS line (R² = {model.rsquared:.3f})"
+)
 
-ax.set_title(f"{y_col} vs {x_col} with OLS regression (n= {len(data)})")
+ax.set_title(
+    f"{y_col} vs {x_col} with OLS regression (n= {len(data)})"
+)
 ax.legend()
 
 # save regression figure
-save_regression = input ("\nwould you like to save the scatterplot with regression plot? (yes/no): ").strip().lower()
+save_regression = input (
+    "\nwould you like to save the scatterplot with regression plot? (yes/no): "
+)
 
 if save_regression.lower() == "yes":
     ols_file = input(
