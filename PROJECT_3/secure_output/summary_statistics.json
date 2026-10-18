@@ -1,0 +1,125 @@
+{
+  "input_file": "healthcare_dataset.csv",
+  "original_rows": 55500,
+  "rows_after_cleaning": 54966,
+  "duplicates_removed": 534,
+  "unparseable_age_values_set_missing": 0,
+  "out_of_range_age_values_set_missing": 0,
+  "unparseable_billing_values_set_missing": 0,
+  "invalid_billing_values_set_missing": 108,
+  "unparseable_room_values_set_missing": 0,
+  "invalid_room_numbers_set_missing": 0,
+  "invalid_date_order_discharge_dates_set_missing": 0,
+  "columns_in_input": [
+    "Name",
+    "Age",
+    "Gender",
+    "Blood Type",
+    "Medical Condition",
+    "Date of Admission",
+    "Doctor",
+    "Hospital",
+    "Insurance Provider",
+    "Billing Amount",
+    "Room Number",
+    "Admission Type",
+    "Discharge Date",
+    "Medication",
+    "Test Results"
+  ],
+  "missing_values_by_column": {
+    "Name": 0,
+    "Age": 0,
+    "Gender": 0,
+    "Blood Type": 0,
+    "Medical Condition": 0,
+    "Date of Admission": 0,
+    "Doctor": 0,
+    "Hospital": 0,
+    "Insurance Provider": 0,
+    "Billing Amount": 106,
+    "Room Number": 0,
+    "Admission Type": 0,
+    "Discharge Date": 0,
+    "Medication": 0,
+    "Test Results": 0
+  },
+  "age": {
+    "n": 54966,
+    "mean": 51.53518538733035,
+    "median": 52.0,
+    "std_population": 19.6054826282343,
+    "min": 13.0,
+    "max": 89.0,
+    "q1": 35.0,
+    "q3": 68.0
+  },
+  "billing_amount": {
+    "n": 54860,
+    "mean": 25594.633636750525,
+    "median": 25593.872999505955,
+    "std_population": 14175.737840235406,
+    "min": 9.238787497393332,
+    "max": 52764.276736469175,
+    "q1": 13299.747939754347,
+    "q3": 37847.06667062174
+  },
+  "category_counts": {
+    "Gender": {
+      "Male": 27496,
+      "Female": 27470
+    },
+    "Blood Type": {
+      "A-": 6898,
+      "A+": 6896,
+      "B+": 6885,
+      "Ab+": 6882,
+      "Ab-": 6874,
+      "B-": 6872,
+      "O+": 6855,
+      "O-": 6804
+    },
+    "Medical Condition": {
+      "Arthritis": 9218,
+      "Diabetes": 9216,
+      "Hypertension": 9151,
+      "Obesity": 9146,
+      "Cancer": 9140,
+      "Asthma": 9095
+    },
+    "Insurance Provider": {
+      "Cigna": 11139,
+      "Medicare": 11039,
+      "Unitedhealthcare": 11014,
+      "Blue Cross": 10952,
+      "Aetna": 10822
+    },
+    "Admission Type": {
+      "Elective": 18473,
+      "Urgent": 18391,
+      "Emergency": 18102
+    },
+    "Medication": {
+      "Lipitor": 11038,
+      "Ibuprofen": 11023,
+      "Aspirin": 10984,
+      "Paracetamol": 10965,
+      "Penicillin": 10956
+    },
+    "Test Results": {
+      "Abnormal": 18437,
+      "Normal": 18331,
+      "Inconclusive": 18198
+    }
+  },
+  "length_of_stay_days": {
+    "n": 54966,
+    "mean": 15.499290470472657,
+    "median": 15.0,
+    "std_population": 8.661392017584856,
+    "min": 1.0,
+    "max": 30.0,
+    "q1": 8.0,
+    "q3": 23.0
+  }
+}
