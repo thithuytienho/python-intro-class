@@ -1,0 +1,50 @@
+/nComplete cases: 2299
+/nWARNING: The response contains non-integer values. It may be a prevalence/rate rather than a count variable. Check whether Poisson regression is appropriate.
+/nVariance Inflation Factor (VIF):
+             Feature       VIF
+               const  1.000000
+     binge_crudeprev  2.528842
+   checkup_crudeprev  1.750444
+  csmoking_crudeprev  6.934794
+depression_crudeprev  2.216376
+   obesity_crudeprev  2.573017
+     sleep_crudeprev  3.209334
+  selfcare_crudeprev 30.514413
+ indeplive_crudeprev 30.953309
+loneliness_crudeprev  3.432565
+foodinsecu_crudeprev 62.830787
+housinsecu_crudeprev 46.839954
+----------------------------------------
+/nFitting Poisson model...
+Optimization terminated successfully.
+         Current function value: 2.347799
+         Iterations 4
+
+Poisson Regression Results
+----------------------------------------
+                          Poisson Regression Results                          
+==============================================================================
+Dep. Variable:        mhlth_crudeprev   No. Observations:                 2299
+Model:                        Poisson   Df Residuals:                     2287
+Method:                           MLE   Df Model:                           11
+Date:                Fri, 23 Oct 2026   Pseudo R-squ.:                 0.04356
+Time:                        16:18:23   Log-Likelihood:                -5397.6
+converged:                       True   LL-Null:                       -5643.4
+Covariance Type:            nonrobust   LLR p-value:                 1.908e-98
+========================================================================================
+                           coef    std err          z      P>|z|      [0.025      0.975]
+----------------------------------------------------------------------------------------
+Intercept                2.8313      0.005    557.495      0.000       2.821       2.841
+binge_crudeprev          0.0077      0.008      0.954      0.340      -0.008       0.024
+checkup_crudeprev       -0.0013      0.007     -0.192      0.848      -0.015       0.012
+csmoking_crudeprev       0.0142      0.013      1.100      0.271      -0.011       0.040
+depression_crudeprev     0.0436      0.008      5.800      0.000       0.029       0.058
+obesity_crudeprev        0.0006      0.008      0.076      0.940      -0.015       0.017
+sleep_crudeprev          0.0096      0.009      1.059      0.289      -0.008       0.027
+selfcare_crudeprev      -0.0733      0.027     -2.708      0.007      -0.126      -0.020
+indeplive_crudeprev      0.1032      0.027      3.759      0.000       0.049       0.157
+loneliness_crudeprev     0.0345      0.009      3.717      0.000       0.016       0.053
+foodinsecu_crudeprev    -0.0492      0.039     -1.247      0.212      -0.126       0.028
+housinsecu_crudeprev     0.0613      0.034      1.786      0.074      -0.006       0.129
+========================================================================================
+/nMcFadden-style pseudo-R-squared: 0.0436
